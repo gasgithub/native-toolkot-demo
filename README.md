@@ -3,15 +3,18 @@
 ## install toolkit
 https://cloudnativetoolkit.dev/getting-started-day-0/install-toolkit/quick-install
 
-Run the installation using the OpenShift CLI
-MAC/Linux
+Run the installation using the OpenShift CLI 
+MAC/Linux 
+```
 curl -sfL get.cloudnativetoolkit.dev | sh -
-
-Winddows
+```
+Winddows 
+```
 oc create -f https://raw.githubusercontent.com/ibm-garage-cloud/ibm-garage-iteration-zero/master/install/install-ibm-toolkit.yaml
 sleep 5
 oc wait pod -l job-name=ibm-toolkit --for=condition=Ready -n default
 oc logs job/ibm-toolkit -f -n default
+```
 
 ## install cli tools
 https://cloudnativetoolkit.dev/getting-started/prereqs
