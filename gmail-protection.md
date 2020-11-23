@@ -29,3 +29,12 @@ When enabling the “Block command line pushes that expose my email” feature, 
     git push
 
 Once you configure Git, commits will use your alternate “noreply” email address, and any pushes that don’t will be rejected.
+
+Change github login:
+https://stackoverflow.com/questions/55982559/how-to-clone-a-git-private-repo-under-a-different-registered-user
+
+You can use the useHttpPath option of gitcredentials to tell git to consider the URL path, as well. This will allow you to use different accounts with different repositories.
+
+git config --global credential.https://github.com.useHttpPath true
+
+
