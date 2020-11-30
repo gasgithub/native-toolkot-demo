@@ -1,0 +1,51 @@
+    - env:
+        - name: SONAR_USER_HOME
+          value: $(params.source-dir)
+        - name: SONARQUBE_URL
+          valueFrom:
+            secretKeyRef:
+              key: SONARQUBE_URL
+              name: sonarqube-access
+              optional: true
+        - name: SONARQUBE_USER
+          valueFrom:
+            secretKeyRef:
+              key: SONARQUBE_USER
+              name: sonarqube-access
+              optional: true
+        - name: SONARQUBE_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              key: SONARQUBE_PASSWORD
+              name: sonarqube-access
+              optional: true
+      image: $(params.js-image)
+      name: sonar-check
+      resources: {}
+      script: |
+        APP_NAME=$(params.app-name)
+
+        if [ -n "${SONARQUBE_URL}" ]; then
+
+          response=$(curl --head --write-out %{http_code} --silent --output /dev/null -u ${SONARQUBE_USER}:${SONARQUBE_PASSWORD} ${SONARQUBE_URL}/api/qualitygates/project_status?projectKey=${APP_NAME})
+          echo "Response: $response"
+
+          while [ $response -eq '404' ]; do
+            sleep 10
+            echo "Trying again to see if scan is done"
+            response=$(curl --head --write-out %{http_code} --silent --output /dev/null -u ${SONARQUBE_USER}:${SONARQUBE_PASSWORD} ${SONARQUBE_URL}/api/qualitygates/project_status?projectKey=${APP_NAME})
+          done
+
+          response=$(curl --silent -u ${SONARQUBE_USER}:${SONARQUBE_PASSWORD} ${SONARQUBE_URL}/api/qualitygates/project_status?projectKey=${APP_NAME})
+
+          if echo $response | grep -q "\"projectStatus\":{\"status\":\"ERROR\""; then
+            echo "====== Gate value failed: $response"
+            exit 1;
+          else  
+            echo "====== Gate value passed! ======"
+          fi
+
+        else
+            echo "Skipping Sonar Qube step"
+        fi
+      workingDir: $(params.source-dir)
