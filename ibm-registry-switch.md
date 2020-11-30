@@ -9,3 +9,14 @@ data:
   REGISTRY_URL: reg url
   REGISTRY_USER: iamapikey
 ```
+edit ibmcloud-config 
+Configure 
+REGION=eu-central 
+REGISTRY_URL=de.icr.io
+REGISTRY_NAMESPACE=poc-registry
+
+
+edit ibm cloud-apikey secret:
+update registry password adn apikey
+
+
