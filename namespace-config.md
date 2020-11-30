@@ -8,3 +8,9 @@ oc policy add-role-to-user system:image-puller system:serviceaccount:inventory-m
 
 ## Config for external IBM Cloud registry
 
+Copy all-icr-io secret from default namespace to target namespace. 
+Link pull secret:
+
+```
+oc secrets link default all-icr-io --for=pull
+```
