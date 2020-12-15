@@ -50,6 +50,15 @@ When deploying an application into the Red Hat OpenShift Service Mesh you must o
 ```
 
 ## Deploy application 
+Deploy application:
+```
+oc apply -n bookinfo -f https://raw.githubusercontent.com/Maistra/istio/maistra-1.1/samples/bookinfo/platform/kube/bookinfo.yaml
+```
+
+Create the ingress gateway by applying the bookinfo-gateway.yaml file:
+```
+oc apply -n bookinfo -f https://raw.githubusercontent.com/Maistra/istio/maistra-1.1/samples/bookinfo/networking/bookinfo-gateway.yaml
+```
 
 
 
