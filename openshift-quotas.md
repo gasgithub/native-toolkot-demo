@@ -38,8 +38,8 @@ spec:
 |--- |--- |
 |requests.storage|The sum of storage requests across all persistent volume claims in any state cannot exceed this value.|
 |persistentvolumeclaims|The total number of persistent volume claims that can exist in the project.|
-|<storage-class-name>.storageclass.storage.k8s.io/requests.storage|The sum of storage requests across all persistent volume claims in any state that have a matching storage class, cannot exceed this value.|
-|<storage-class-name>.storageclass.storage.k8s.io/persistentvolumeclaims|The total number of persistent volume claims with a matching storage class that can exist in the project.|
+|*storage-class-name*.storageclass.storage.k8s.io/requests.storage|The sum of storage requests across all persistent volume claims in any state that have a matching storage class, cannot exceed this value.|
+|*storage-class-name*.storageclass.storage.k8s.io/persistentvolumeclaims|The total number of persistent volume claims with a matching storage class that can exist in the project.|
   
 ## Table 3. Object counts managed by quota
 
