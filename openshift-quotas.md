@@ -2,7 +2,7 @@
 https://docs.openshift.com/container-platform/4.4/applications/quotas/quotas-setting-per-project.html
 
 Sample yaml:
-
+```
 apiVersion: v1
 kind: ResourceQuota
 metadata:
@@ -17,6 +17,7 @@ spec:
     requests.memory: 1Gi 
     limits.cpu: "2" 
     limits.memory: 2Gi 
+```    
 
 ## Table 1. Compute resources managed by quota
 
