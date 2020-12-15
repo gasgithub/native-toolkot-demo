@@ -37,6 +37,19 @@ You can do it via web console or command line -https://docs.openshift.com/contai
 ##  Create Istio Service Mesh Member Roll
 Create default roll, add `bookinfo` project to members
 
+# Preparing application
+
+## Enabling cart injection
+When deploying an application into the Red Hat OpenShift Service Mesh you must opt in to injection by specifying the sidecar.istio.io/inject annotation with a value of "true".
+
+```
+  template:
+    metadata:
+      annotations:
+        sidecar.istio.io/inject: "true"
+```
+
+## Deploy application 
 
 
 
