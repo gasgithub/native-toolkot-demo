@@ -60,5 +60,17 @@ Create the ingress gateway by applying the bookinfo-gateway.yaml file:
 oc apply -n bookinfo -f https://raw.githubusercontent.com/Maistra/istio/maistra-1.1/samples/bookinfo/networking/bookinfo-gateway.yaml
 ```
 
+## Check ingress gateway route:
 
+Should be something like:
+```	
+oc -n istio-system get route istio-ingressgateway -o jsonpath='{.spec.host}'
+
+http://istio-ingressgateway-istio-system.clusterName
+```
+
+## Create default routes
+```
+oc apply -n bookinfo -f https://raw.githubusercontent.com/Maistra/istio/maistra-1.1/samples/bookinfo/networking/destination-rule-all.yaml
+```
 
