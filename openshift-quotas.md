@@ -57,4 +57,37 @@ spec:
 |persistentvolumeclaims|The total number of persistent volume claims that can exist in the project.|
 |openshift.io/imagestreams|The total number of imagestreams that can exist in the project.|  
   
+# Quotas for multiple projects
 
+```
+apiVersion: v1
+kind: ClusterResourceQuota
+metadata:
+  name: for-user
+spec:
+  quota: 
+    hard:
+      pods: "10"
+      secrets: "20"
+  selector:
+    annotations: 
+      openshift.io/requester: <user_name>
+    labels: null 
+status:
+  namespaces: 
+  - namespace: ns-one
+    status:
+      hard:
+        pods: "10"
+        secrets: "20"
+      used:
+        pods: "1"
+        secrets: "9"
+  total: 
+    hard:
+      pods: "10"
+      secrets: "20"
+    used:
+      pods: "1"
+      secrets: "9"
+```  
